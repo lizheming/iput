@@ -24,7 +24,7 @@ ip input component for react(>=0.14).
 | name         | type                   | default | description                           |
 |--------------|------------------------|---------|---------------------------------------|
 | className    | String                 |         | additional css class of root dom node |
-| defaultValue | String | Array<String> |         | specify the default ip                |
+| defaultValue | String\| Array<String> |         | specify the default ip                |
 | onChange     | Function(value:string) |         | called when input value change        |
 | isError      | Function               |         | custom function to check value        |
 
@@ -32,7 +32,7 @@ ip input component for react(>=0.14).
 
 run `npm start` and open `http://localhost:8080`
 
-online example: http://lizheming.github.io/iput/example
+online example: http://lizheming.github.io/iput
 
 ### License
 
