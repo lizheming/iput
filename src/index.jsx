@@ -42,6 +42,16 @@ class IPut extends React.Component {
     isError: () => false,
     onChange: new Function()
   }
+  static propTypes = {
+    className: React.PropTypes.string,
+    defaultValue: (props, propName) => {
+      let value = props[propName].split('.');
+      let isIP = value.length === 4 && value.map(val => parseInt(val)).every( (val, i) => value[i] === '' || ( !isNaN(val) && val >= 0 && val <=255));
+      if( !isIP ) { return new Error('It\'s not a enable IP'); }
+    },
+    isError: React.PropTypes.func,
+    onChange: React.PropTypes.func
+  }
   state = {
     value: []
   }
@@ -65,7 +75,7 @@ class IPut extends React.Component {
 
     let value = this.state.value;
     value[i] = val;
-    this.setState({value}, () => this.onPropsChange());
+    this.setState({value}, this.onPropsChange);
 
     if( !isNaN(val) && String(val).length === 3 && i < 3 ) { this[`_input-${i + 1}`].focus(); }
   }
@@ -82,7 +92,7 @@ class IPut extends React.Component {
     if( value.length === 4 - i && value.every(val => !isNaN(val) && val > 0 && val < 255) ) {
       let oldValue = this.state.value;
       value.forEach( (val, j) => oldValue[i+j] = val );
-      this.setState({value: oldValue}, () => this.onPropsChange());
+      this.setState({value: oldValue}, this.onPropsChange);
       return e.preventDefault();
     }
   }
@@ -95,7 +105,7 @@ class IPut extends React.Component {
     let className = [
       'react-ip-input',
       this.props.className,
-      this.props.isError() ? 'has-error' : ''
+      this.props.isError( this.state.value.join('.') ) ? 'has-error' : ''
     ].join(' ');
 
     return (

@@ -3,9 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <title>IPut Example</title>
+  <style>
+  .header {
+      min-width: 200px;
+      max-width: 790px;
+      margin: 0 auto;
+  }
+  .example {
+    min-width: 200px;
+    max-width: 790px;
+    margin: 30px auto;
+    padding: 0 30px;
+    color: #333;
+    overflow: hidden;
+    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    word-wrap: break-word;
+  }
+  .example > h3 {
+    background-color: #f5f5f5;
+    margin: 0;
+    border-radius: 3px 3px 0 0;
+    border: 1px solid #d8d8d8;
+    border-bottom: 0;
+    padding: 9px 10px 10px;
+    font-size: 14px;
+    line-height: 17px;
+    display: block;
+  }
+  #app {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    padding: 30px;
+    word-wrap: break-word;
+  }
+  </style>
 </head>
 <body>
-  <div id="app"></div>
+  <div class="header">
+    <h1>IPut</h1>
+  </div>
+  <div class="example">
+    <h3>EXAMPLES</h3>
+    <div id="app"></div>
+  </div>
+  <!-- <a href="http://github.com/lizheming/iput"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a> -->
   <script src="main.js"></script>
 </body>
 </html>
