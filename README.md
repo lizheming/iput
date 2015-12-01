@@ -8,6 +8,7 @@ ip input component for react(>=0.14).
 
 #### basic Usage
 
+```javascript
   import React from 'react';
   import ReactDOM from 'react-dom';
   import IPut from 'iput';
@@ -16,6 +17,7 @@ ip input component for react(>=0.14).
     <IPut />,
     document.getElementById('app')
   );
+```
 
 ### API
 
@@ -24,7 +26,7 @@ ip input component for react(>=0.14).
 | name         | type                   | default | description                           |
 |--------------|------------------------|---------|---------------------------------------|
 | className    | String                 |         | additional css class of root dom node |
-| defaultValue | String\| Array<String> |         | specify the default ip                |
+| defaultValue | String\|Array\<String\>|         | specify the default ip                |
 | onChange     | Function(value:string) |         | called when input value change        |
 | isError      | Function               |         | custom function to check value        |
 
