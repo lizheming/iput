@@ -1,6 +1,6 @@
 {
   "name": "iput",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "an IP input component like windows",
   "main": "index.js",
   "scripts": {
@@ -10,9 +10,19 @@
   "keywords": [
     "react",
     "react-component",
-    "react"
+    "react",
+    "input",
+    "ip"
   ],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lizheming/iput.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lizheming/iput/issues"
+  },
+  "homepage": "https://github.com/lizheming/iput#readme",
+  "author": "lizheming",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.2.1",
