@@ -61,7 +61,7 @@ class IPut extends React.Component {
    * default state value
    */
   state = {
-    value: ''
+    value: []
   }
   /**
    * constructor
