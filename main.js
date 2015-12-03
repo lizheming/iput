@@ -56,9 +56,9 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _src = __webpack_require__(159);
+	var _iput = __webpack_require__(159);
 
-	var _src2 = _interopRequireDefault(_src);
+	var _iput2 = _interopRequireDefault(_iput);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -95,23 +95,21 @@
 	          null,
 	          'Default'
 	        ),
-	        _react2.default.createElement(_src2.default, null),
+	        _react2.default.createElement(_iput2.default, null),
 	        _react2.default.createElement(
 	          'h2',
 	          null,
 	          'With default value'
 	        ),
-	        _react2.default.createElement(_src2.default, { defaultValue: '192.168.1.1' }),
+	        _react2.default.createElement(_iput2.default, { defaultValue: '192.168.1.1' }),
 	        _react2.default.createElement(
 	          'h2',
 	          null,
 	          'Set value when onChange'
 	        ),
-	        _react2.default.createElement(_src2.default, { onChange: function onChange(val) {
-	            console.log(val);
-	            _this2.setState({ ip: val });
-	          }
-	        }),
+	        _react2.default.createElement(_iput2.default, { onChange: function onChange(val) {
+	            return _this2.setState({ ip: val });
+	          } }),
 	        _react2.default.createElement(
 	          'div',
 	          null,
@@ -123,7 +121,7 @@
 	          null,
 	          'return error when ip is 127.0.0.1'
 	        ),
-	        _react2.default.createElement(_src2.default, { isError: function isError(val) {
+	        _react2.default.createElement(_iput2.default, { isError: function isError(val) {
 	            return val === '127.0.0.1';
 	          } })
 	      );
@@ -19784,6 +19782,14 @@
 
 	'use strict';
 
+	module.exports = __webpack_require__(160);
+
+/***/ },
+/* 160 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
 	Object.defineProperty(exports, "__esModule", {
@@ -19794,7 +19800,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	__webpack_require__(160);
+	__webpack_require__(161);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -19806,6 +19812,9 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	/**
+	 * Function to get cursor position
+	 */
 	function getRange(el) {
 	  var cuRange,
 	      tbRange,
@@ -19848,6 +19857,14 @@
 	var IPut = (function (_React$Component) {
 	  _inherits(IPut, _React$Component);
 
+	  /**
+	   * constructor
+	   */
+
+	  /**
+	   * set prop type
+	   */
+
 	  function IPut() {
 	    _classCallCheck(this, IPut);
 
@@ -19858,24 +19875,30 @@
 	    };
 	    return _this;
 	  }
+	  /**
+	   * default state value
+	   */
+
+	  /**
+	   * set default props
+	   */
 
 	  _createClass(IPut, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      this.setState({
-	        value: this.props.defaultValue.split('.')
+	        value: Array.isArray(this.props.defaultValue) ? this.props.defaultValue : this.props.defaultValue.split('.')
 	      });
 	    }
-	  }, {
-	    key: 'componentWillReceiveProps',
-	    value: function componentWillReceiveProps(nextProps) {
-	      this.setState({
-	        value: nextProps.defaultValue.split('.')
-	      });
-	    }
+	    /**
+	     * Change Event
+	     */
+
 	  }, {
 	    key: 'handleChange',
 	    value: function handleChange(e, i) {
+	      var _this2 = this;
+
 	      var val = parseInt(e.target.value);
 	      if (isNaN(e.target.value)) {
 	        return e.preventDefault();
@@ -19886,12 +19909,18 @@
 
 	      var value = this.state.value;
 	      value[i] = val;
-	      this.setState({ value: value }, this.onPropsChange);
+	      this.setState({ value: value }, function () {
+	        return _this2.onPropsChange();
+	      });
 
 	      if (!isNaN(val) && String(val).length === 3 && i < 3) {
 	        this['_input-' + (i + 1)].focus();
 	      }
 	    }
+	    /**
+	     * Keydown Event
+	     */
+
 	  }, {
 	    key: 'handleKeyDown',
 	    value: function handleKeyDown(e, i) {
@@ -19905,23 +19934,29 @@
 	      }
 	      this['_input-' + domId].focus();
 	    }
+	    /**
+	     * Paste Event
+	     */
+
 	  }, {
 	    key: 'handlePaste',
 	    value: function handlePaste(e, i) {
-	      var _this2 = this;
+	      var _this3 = this;
 
 	      var value = e.clipboardData.getData('text/plain').split('.').map(function (val) {
 	        return parseInt(val);
 	      });
 	      if (value.length === 4 - i && value.every(function (val) {
-	        return !isNaN(val) && val > 0 && val < 255;
+	        return !isNaN(val) && val >= 0 && val <= 255;
 	      })) {
 	        var _ret = (function () {
-	          var oldValue = _this2.state.value;
+	          var oldValue = _this3.state.value;
 	          value.forEach(function (val, j) {
 	            return oldValue[i + j] = val;
 	          });
-	          _this2.setState({ value: oldValue }, _this2.onPropsChange);
+	          _this3.setState({ value: oldValue }, function () {
+	            return _this3.onPropsChange();
+	          });
 	          return {
 	            v: e.preventDefault()
 	          };
@@ -19930,17 +19965,23 @@
 	        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
 	      }
 	    }
+	    /**
+	     * call change props
+	     */
+
 	  }, {
 	    key: 'onPropsChange',
 	    value: function onPropsChange() {
-	      this.props.onChange(this.state.value.join('.'));
+	      this.props.onChange(this.state.value.map(function (val) {
+	        return isNaN(val) ? '' : val;
+	      }).join('.'));
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this3 = this;
+	      var _this4 = this;
 
-	      var className = ['react-ip-input', this.props.className, this.props.isError(this.state.value.join('.')) ? 'has-error' : ''].join(' ');
+	      var className = ['react-ip-input', this.props.className, this.props.isError() ? 'has-error' : ''].join(' ');
 
 	      return _react2.default.createElement(
 	        'div',
@@ -19951,19 +19992,19 @@
 	            { className: 'react-ip-input__item', key: i },
 	            _react2.default.createElement('input', {
 	              ref: function ref(el) {
-	                return _this3['_input-' + i] = el;
+	                return _this4['_input-' + i] = el;
 	              },
 	              type: 'text',
 	              defaultValue: isNaN(val) ? '' : val,
 	              value: isNaN(val) ? '' : val,
 	              onChange: function onChange(e) {
-	                return _this3.handleChange(e, i);
+	                return _this4.handleChange(e, i);
 	              },
 	              onKeyDown: function onKeyDown(e) {
-	                return _this3.handleKeyDown(e, i);
+	                return _this4.handleKeyDown(e, i);
 	              },
 	              onPaste: function onPaste(e) {
-	                return _this3.handlePaste(e, i);
+	                return _this4.handlePaste(e, i);
 	              }
 	            }),
 	            i !== 3 ? _react2.default.createElement(
@@ -19990,40 +20031,30 @@
 	};
 	IPut.propTypes = {
 	  className: _react2.default.PropTypes.string,
-	  defaultValue: function defaultValue(props, propName) {
-	    var value = props[propName].split('.');
-	    var isIP = value.length === 4 && value.map(function (val) {
-	      return parseInt(val);
-	    }).every(function (val, i) {
-	      return value[i] === '' || !isNaN(val) && val >= 0 && val <= 255;
-	    });
-	    if (!isIP) {
-	      return new Error('It\'s not a enable IP');
-	    }
-	  },
+	  defaultValue: _react2.default.PropTypes.string || _react2.default.PropTypes.array,
 	  isError: _react2.default.PropTypes.func,
 	  onChange: _react2.default.PropTypes.func
 	};
 	exports.default = IPut;
 
 /***/ },
-/* 160 */
+/* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(161);
+	var content = __webpack_require__(162);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(163)(content, {});
+	var update = __webpack_require__(164)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../node_modules/css-loader/index.js!./style.css", function() {
-				var newContent = require("!!./../node_modules/css-loader/index.js!./style.css");
+			module.hot.accept("!!./../../css-loader/index.js!./style.css", function() {
+				var newContent = require("!!./../../css-loader/index.js!./style.css");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -20033,10 +20064,10 @@
 	}
 
 /***/ },
-/* 161 */
+/* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(162)();
+	exports = module.exports = __webpack_require__(163)();
 	// imports
 
 
@@ -20047,7 +20078,7 @@
 
 
 /***/ },
-/* 162 */
+/* 163 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -20102,7 +20133,7 @@
 	};
 
 /***/ },
-/* 163 */
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
