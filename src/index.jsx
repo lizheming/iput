@@ -1,6 +1,9 @@
 import React from 'react';
 import './style.css';
 
+/**
+ * Function to get cursor position
+ */
 function getRange(el) {
     var cuRange, tbRange, headRange, range, dupRange, ret = {};
     if(el.setSelectionRange){
@@ -36,28 +39,44 @@ function getRange(el) {
 }
 
 class IPut extends React.Component {
+  /**
+   * set default props
+   */
   static defaultProps = {
     className: '',
     defaultValue: '...',
     isError: () => false,
     onChange: new Function()
   }
-  state = {
-    value: []
+  /**
+   * set prop type
+   */
+  static propTypes = {
+    className: React.PropTypes.string,
+    defaultValue: React.PropTypes.string || React.PropTypes.array,
+    isError: React.PropTypes.func,
+    onChange: React.PropTypes.func
   }
+  /**
+   * default state value
+   */
+  state = {
+    value: ''
+  }
+  /**
+   * constructor
+   */
   constructor() {
     super();
   }
   componentDidMount() {
     this.setState({
-      value: this.props.defaultValue.split('.')
+      value: Array.isArray(this.props.defaultValue) ? this.props.defaultValue : this.props.defaultValue.split('.')
     });
   }
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      value: nextProps.defaultValue.split('.')
-    });
-  }
+  /**
+   * Change Event
+   */
   handleChange(e, i) {
     let val = parseInt( e.target.value );
     if( isNaN(e.target.value) ) { return e.preventDefault(); }
@@ -69,6 +88,9 @@ class IPut extends React.Component {
 
     if( !isNaN(val) && String(val).length === 3 && i < 3 ) { this[`_input-${i + 1}`].focus(); }
   }
+  /**
+   * Keydown Event
+   */
   handleKeyDown(e, i) {
     /* 37 = ←, 39 = →, 8 = backspace */
     let domId = i;
@@ -76,19 +98,23 @@ class IPut extends React.Component {
     if( e.keyCode === 39 && getRange(e.target).end === e.target.value.length && i < 3 ) { domId = i + 1; }
     this[`_input-${domId}`].focus();
   }
-
+  /**
+   * Paste Event
+   */
   handlePaste(e, i) {
     let value = e.clipboardData.getData('text/plain').split('.').map(val => parseInt(val));
-    if( value.length === 4 - i && value.every(val => !isNaN(val) && val > 0 && val < 255) ) {
+    if( value.length === 4 - i && value.every(val => !isNaN(val) && val >= 0 && val <= 255) ) {
       let oldValue = this.state.value;
       value.forEach( (val, j) => oldValue[i+j] = val );
       this.setState({value: oldValue}, () => this.onPropsChange());
       return e.preventDefault();
     }
   }
-
+  /**
+   * call change props
+   */
   onPropsChange() {
-    this.props.onChange( this.state.value.join('.') );
+    this.props.onChange( this.state.value.map(val => isNaN(val) ? '' : val).join('.') );
   }
 
   render() {
