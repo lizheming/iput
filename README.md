@@ -1,5 +1,7 @@
 ## IPut
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/lizheming/iput.svg)](https://greenkeeper.io/)
+
 ### About
 
 ip input component for react(>=0.14).
