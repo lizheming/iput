@@ -1,6 +1,6 @@
 {
   "name": "iput",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "description": "an IP input component like windows",
   "main": "index.js",
   "scripts": {
