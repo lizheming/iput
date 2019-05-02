@@ -4,6 +4,7 @@
   "description": "",
   "scripts": {
     "start": "webpack-dev-server",
+    "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,9 +19,10 @@
   },
   "homepage": "https://github.com/lizheming/iput#readme",
   "dependencies": {
-    "iput": "^0.0.2",
-    "react": "^0.14.3",
-    "react-dom": "^0.14.3"
+    "iput": "^1.0.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   },
   "devDependencies": {
     "babel-core": "^6.2.1",
