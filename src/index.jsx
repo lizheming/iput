@@ -111,15 +111,18 @@ export default class IPut extends React.Component {
   }
 
   render() {
+    const { value } = this.state;
+    const ip = value.map(val => isNaN(val) ? '' : val).join('.');
+
     const className = [
       'react-ip-input',
       this.props.className,
-      this.props.isError() ? 'has-error' : ''
+      this.props.isError(ip) ? 'has-error' : ''
     ].join(' ');
 
     return (
       <div className={className}>
-        {this.state.value.map((val, i) =>
+        {value.map((val, i) =>
           <div className="react-ip-input__item" key={i}>
             <input
               ref={el => this[`_input-${i}`] = el}
