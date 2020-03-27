@@ -1,16 +1,27 @@
+const path = require('path');
+
 module.exports = {
-	entry: "./main.jsx",
+	entry: path.join(__dirname, './index.js'),
 	output: {
-		path: "./",
-		filename: "main.js"
+		filename: 'main.js'
 	},
-	resolve: {
-		extensions: ['', '.js', '.jsx']
-	},
-	module: {
-		loaders: [
-			{test: /\.jsx?$/, loader: "babel-loader?presets[]=es2015&presets[]=react&presets[]=stage-0"},
-			{test: /\.css$/, loader: "style-loader!css-loader"}
-		]
-	}
+  resolve: {
+    extensions: ['.js', '.jsx']
+  },
+  module: {
+    rules: [
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: 'babel-loader?cacheDirectory'
+      },
+      {
+        test: /\.(css|less)$/,
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
+      }
+    ]
+  },
 }

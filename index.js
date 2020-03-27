@@ -6,7 +6,6 @@ class Main extends React.Component {
   state = {
     ip: ''
   }
-  constructor() { super(); }
 
   render() {
     return (
