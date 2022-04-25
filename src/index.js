@@ -63,11 +63,11 @@ export default class IPut extends React.Component {
    * Keydown Event
    */
   handleKeyDown(e, i) {
-    /* 37 = ←, 39 = →, 8 = backspace, 190 = . */
+    /* 37 = ←, 39 = →, 8 = backspace, 110 or 190 = . */
     let domId = i;
     if ((e.keyCode === 37 || e.keyCode === 8) && getRange(e.target).end === 0 && i > 0) { domId = i - 1; }
     if (e.keyCode === 39 && getRange(e.target).end === e.target.value.length && i < 3) { domId = i + 1; }
-    if (e.keyCode === 190) {
+    if (e.keyCode === 110 || e.keyCode === 190) {
       e.preventDefault();
       if(i < 3) {
         domId = i + 1;
