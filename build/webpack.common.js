@@ -1,5 +1,3 @@
-const es3ifyPlugin = require('es3ify-webpack-plugin');
-
 var reactExternal = {
   root: 'React',
   commonjs2: 'react',
@@ -36,8 +34,5 @@ module.exports = {
         ]
       }
     ]
-  },
-  plugins: [
-    new es3ifyPlugin()
-  ]
+  }
 };

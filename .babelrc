@@ -5,8 +5,7 @@
       {
         "targets": {
           "ie": 8
-        },
-        "loose": true
+        }
       }
     ],
     "@babel/preset-react"
