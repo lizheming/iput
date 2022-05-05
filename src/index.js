@@ -11,7 +11,7 @@ export default class IPut extends React.Component {
     className: '',
     defaultValue: '...',
     isError: () => false,
-    onChange: new Function()
+    onChange: () => {}
   }
   /**
    * set prop type
