@@ -1,6 +1,6 @@
 {
   "name": "iput",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "an IP input component like windows",
   "main": "lib/iput.js",
   "directories": {
